@@ -40,7 +40,8 @@ export default function Footer() {
           </div>
           <div>
             <div className="font-semibold mb-3">Contact</div>
-            <p className="text-white/90">support@skillgrow.example</p>
+            <p className="text-white/90">mostafakamal78578@gmail.com</p>
+            <p className="text-white/90">01096926586</p>
             <div className="mt-3 flex gap-3">
               {["f", "▶", "◎"].map((icon, i) => (
                 <a
