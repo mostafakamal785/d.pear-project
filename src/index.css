@@ -1,0 +1,50 @@
+/* Tailwind v3 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --container: 1200px;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply max-w-container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .card {
+    @apply bg-white rounded-card shadow-soft;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center rounded-pill px-5 py-2.5 font-semibold transition-colors;
+  }
+  .btn-primary {
+    @apply btn bg-brand-600 text-white hover:bg-brand-700;
+  }
+  .btn-outline {
+    @apply btn border border-slate-300 text-slate-900 hover:bg-slate-900 hover:text-white;
+  }
+  .btn-white {
+    @apply btn bg-white text-ink-900 hover:bg-ink-100;
+  }
+  .badge {
+    @apply inline-flex items-center rounded-pill px-2.5 py-1 text-xs font-semibold bg-slate-200 text-slate-900;
+  }
+  .section-title {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-extrabold;
+  }
+}
+
+/* Gradient surface for hero sections */
+.hero-surface {
+  background-image: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 50%, #4c1d95 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

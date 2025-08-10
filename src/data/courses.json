@@ -1,0 +1,145 @@
+[
+  {
+    "id": "c1",
+    "slug": "video-editing",
+    "title": "Video Editing & Storytelling",
+    "category": "Editing & Design",
+    "price": 199,
+    "isFree": false,
+    "thumbnail": "/images/course-1.jpg",
+    "badge": "Popular",
+    "cta": "Enroll Now"
+  },
+  {
+    "id": "c2",
+    "slug": "web-design",
+    "title": "Web Design with WordPress",
+    "category": "Design & Development",
+    "price": 149,
+    "isFree": false,
+    "thumbnail": "/images/course-2.jpg",
+    "badge": "Updated",
+    "cta": "Enroll Now"
+  },
+  {
+    "id": "c3",
+    "slug": "graphic-design",
+    "title": "Graphic Design Fundamentals",
+    "category": "Editing & Design",
+    "price": 0,
+    "isFree": true,
+    "thumbnail": "/images/course-3.jpg",
+    "badge": "",
+    "cta": "Start Now"
+  },
+  {
+    "id": "c4",
+    "slug": "affiliate-marketing",
+    "title": "Affiliate Marketing A to Z",
+    "category": "Marketing",
+    "price": 99,
+    "isFree": false,
+    "thumbnail": "/images/course-4.jpg",
+    "badge": "",
+    "cta": "Enroll Now"
+  },
+  {
+    "id": "c5",
+    "slug": "ui-ux",
+    "title": "UI/UX Design Crash Course",
+    "category": "Design & Development",
+    "price": 159,
+    "isFree": false,
+    "thumbnail": "/images/course-5.jpg",
+    "badge": "Coming Soon",
+    "cta": "Details"
+  },
+  {
+    "id": "c6",
+    "slug": "shopify-ecommerce",
+    "title": "Shopify Ecommerce Mastery",
+    "category": "Ecommerce",
+    "price": 189,
+    "isFree": false,
+    "thumbnail": "/images/course-6.jpg",
+    "badge": "",
+    "cta": "Enroll Now"
+  },
+  {
+    "id": "c7",
+    "slug": "facebook-marketing",
+    "title": "Facebook Marketing Pro",
+    "category": "Marketing",
+    "price": 119,
+    "isFree": false,
+    "thumbnail": "/images/course-7.jpg",
+    "badge": "",
+    "cta": "Enroll Now"
+  },
+  {
+    "id": "c8",
+    "slug": "seo-basics",
+    "title": "SEO for Professionals",
+    "category": "Marketing",
+    "price": 129,
+    "isFree": false,
+    "thumbnail": "/images/course-8.jpg",
+    "badge": "",
+    "cta": "Enroll Now"
+  },
+  {
+    "id": "c9",
+    "slug": "email-marketing",
+    "title": "Email Marketing Essentials",
+    "category": "Marketing",
+    "price": 109,
+    "isFree": false,
+    "thumbnail": "/images/course-9.jpg",
+    "badge": "",
+    "cta": "Enroll Now"
+  },
+  {
+    "id": "c10",
+    "slug": "digital-art",
+    "title": "Digital Art & Illustration",
+    "category": "Editing & Design",
+    "price": 0,
+    "isFree": true,
+    "thumbnail": "/images/course-10.jpg",
+    "badge": "",
+    "cta": "Start Now"
+  },
+  {
+    "id": "c11",
+    "slug": "office-suite",
+    "title": "Microsoft Office Basics",
+    "category": "Productivity",
+    "price": 0,
+    "isFree": true,
+    "thumbnail": "/images/course-11.jpg",
+    "badge": "",
+    "cta": "Start Now"
+  },
+  {
+    "id": "c12",
+    "slug": "chatgpt-ai",
+    "title": "ChatGPT AI Crash Course",
+    "category": "Artificial Intelligence",
+    "price": 0,
+    "isFree": true,
+    "thumbnail": "/images/course-12.jpg",
+    "badge": "",
+    "cta": "Start Now"
+  },
+  {
+    "id": "c13",
+    "slug": "3d-animation",
+    "title": "3D Animation Basics",
+    "category": "Editing & Design",
+    "price": 0,
+    "isFree": true,
+    "thumbnail": "/images/course-3d.png",
+    "badge": "",
+    "cta": "Start Now"
+  }
+]
