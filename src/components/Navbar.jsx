@@ -1,7 +1,6 @@
-"use client"
-
-import { useState } from "react"
-import { Link, NavLink } from "react-router-dom"
+import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { FiMenu, FiX } from "react-icons/fi";
 
 function Item({ to, label, onClick }) {
   return (
@@ -17,11 +16,11 @@ function Item({ to, label, onClick }) {
     >
       {label}
     </NavLink>
-  )
+  );
 }
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200 shadow-sm">
@@ -54,15 +53,15 @@ export default function Navbar() {
 
         {/* Mobile Toggle Button */}
         <button
-          className={`ml-auto md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg transition-colors ${
-            open ? "bg-slate-200" : "hover:bg-slate-200"
-          }`}
+          className="ml-auto md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg transition-colors hover:bg-slate-200"
           aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="block h-0.5 w-5 bg-slate-900 mb-1"></span>
-          <span className="block h-0.5 w-5 bg-slate-900 mb-1"></span>
-          <span className="block h-0.5 w-5 bg-slate-900"></span>
+          {open ? (
+            <FiX size={24} className="text-brand-600" />
+          ) : (
+            <FiMenu size={24} className="text-brand-600" />
+          )}
         </button>
       </div>
 
@@ -86,5 +85,5 @@ export default function Navbar() {
         </div>
       )}
     </header>
-  )
+  );
 }

@@ -2,15 +2,19 @@ import HeroSection from "../components/HeroSection"
 import CourseCard from "../components/CourseCard"
 import { courses } from "../data/courses"
 import { Link } from "react-router-dom"
+// استيراد الدورات من ملف JSON
 
 export default function Home() {
-  const featured = courses.filter(c => c.featured).slice(0, 4)
+  // تعديل: اختيار أول 4 دورات كدورات مميزة
+  const featured = courses.slice(0, 4)
+  console.log('Featured courses:', featured);
 
   return (
     <>
+    
       <HeroSection />
 
-      {/* Featured Courses */}
+      {/* قسم الدورات المميزة */}
       <section className="bg-slate-50">
         <div className="container-x py-12 sm:py-16">
           <div className="mb-8 sm:mb-10 flex items-center justify-between">
@@ -31,7 +35,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* قسم الحث على اتخاذ إجراء */}
       <section className="hero-surface text-white" id="cta">
         <div className="container-x grid lg:grid-cols-2 items-center gap-10 py-16">
           <div className="space-y-6">

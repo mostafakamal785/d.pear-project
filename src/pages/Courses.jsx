@@ -1,26 +1,22 @@
-import React from "react"
-import { useMemo, useState } from "react"
+import React, { useMemo, useState } from "react"
 import CourseCard from "../components/CourseCard"
 import { courses as allCourses } from "../data/courses"
 
 export default function Courses() {
   const [filters, setFilters] = useState({ price: "all", category: "All", q: "" })
 
-  const categories = useMemo(() => ["All", ...Array.from(new Set(allCourses.map((c) => c.category)))], [])
+  const categories = useMemo(
+    () => ["All", ...Array.from(new Set(allCourses.map((c) => c.category)))],
+    []
+  )
 
   const filtered = useMemo(() => {
     return allCourses.filter((c) => {
       const priceOk = filters.price === "all" || (filters.price === "free" ? c.price === 0 : c.price > 0)
       const catOk = filters.category === "All" || c.category === filters.category
-
       const q = filters.q.trim().toLowerCase()
-      const searchableText =
-        (c.title || "").toLowerCase() +
-        " " +
-        (c.description || "").toLowerCase() // safe access حتى لو مش موجودة
-
+      const searchableText = `${(c.title || "").toLowerCase()} ${(c.description || "").toLowerCase()}`
       const qOk = !q || searchableText.includes(q)
-
       return priceOk && catOk && qOk
     })
   }, [filters])
@@ -76,9 +72,11 @@ export default function Courses() {
 
       {/* Course List */}
       <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {filtered.map((c) => (
-          <CourseCard key={c.id} course={c} />
-        ))}
+        {filtered.length > 0 ? (
+          filtered.map((c) => <CourseCard key={c.id} course={c} />)
+        ) : (
+          <p>No courses found.</p>
+        )}
       </div>
     </section>
   )

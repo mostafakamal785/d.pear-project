@@ -3,7 +3,9 @@ import { Link } from "react-router-dom"
 export default function Footer() {
   return (
     <footer className="mt-24 text-white bg-gradient-to-br from-brand-900 via-brand-700 to-brand-900">
-      <div className="container-x grid gap-10 sm:grid-cols-2 lg:grid-cols-3 py-14">
+      <div className="container-x py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        
+        {/* Logo + About */}
         <div className="space-y-4">
           <div className="inline-flex items-center gap-2">
             <div className="h-8 w-8 rounded-lg bg-white/30"></div>
@@ -14,7 +16,8 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-6">
+        {/* Pages + Contact */}
+        <div className="grid gap-8 sm:grid-cols-2">
           <div>
             <div className="font-semibold mb-3">Pages</div>
             <ul className="space-y-2 text-white/90">
@@ -25,7 +28,10 @@ export default function Footer() {
                 { name: "Contact", to: "/contact" }
               ].map((link) => (
                 <li key={link.to}>
-                  <Link to={link.to} className="hover:text-white hover:underline transition-colors">
+                  <Link
+                    to={link.to}
+                    className="hover:text-white hover:underline transition-colors"
+                  >
                     {link.name}
                   </Link>
                 </li>
@@ -49,16 +55,19 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="justify-self-center lg:justify-self-end self-center text-white/90">
+        {/* Payments */}
+        <div className="lg:justify-self-end self-center text-white/90">
           <div className="text-sm font-medium">Payments accepted</div>
-          <div className="mt-2 grid grid-cols-6 gap-2">
+          <div className="mt-2 grid grid-cols-6 gap-2 max-w-[220px]">
             {Array.from({ length: 12 }).map((_, i) => (
               <div key={i} className="h-6 w-10 rounded bg-white/25"></div>
             ))}
           </div>
         </div>
       </div>
-      <div className="border-t border-white/20">
+
+      {/* Bottom Bar */}
+      <div className="border-t border-white/20 mt-10">
         <div className="container-x py-6 text-center text-white/80 text-sm">
           © {new Date().getFullYear()} SkillGrow — All rights reserved.
         </div>
