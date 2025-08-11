@@ -2,10 +2,12 @@ export default function Contact() {
   return (
     <div>
       {/* Hero */}
+
       <section className="hero-surface text-white">
-        <div className="container-x py-14 text-center">
-          <h1 className="text-4xl font-extrabold">Contact</h1>
-          <p className="text-white/80 mt-2">We'd love to hear from you</p>
+        <div className="container-x py-20 text-center space-y-4">
+          <h1 className="text-4xl sm:text-5xl font-extrabold">Contact</h1>
+          <p className="text-white/80 max-w-2xl mx-auto">
+We'd love to hear from you          </p>
         </div>
       </section>
 
@@ -46,7 +48,7 @@ export default function Contact() {
           <div className="card p-6">
             <h3 className="font-semibold text-lg mb-2">Office</h3>
             <p className="text-slate-700">123 Learning St, Knowledge City</p>
-            <p className="text-slate-700">support@skillgrow.example</p>
+            <p className="text-slate-700">mostafakamal78578@gmail.com</p>
           </div>
           <div className="card overflow-hidden">
             <img

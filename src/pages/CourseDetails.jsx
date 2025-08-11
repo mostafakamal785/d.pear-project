@@ -92,7 +92,7 @@ export default function CourseDetails() {
               {isSaved ? "Remove from Saved" : "Save Course"}
             </button>
           ) : (
-            <Link to="/login" className="inline-block h-11 px-6 rounded-md text-white font-semibold bg-indigo-600 hover:bg-indigo-700 flex items-center">
+            <Link to="/login" className="inline-block h-11 px-6 rounded-md text-white font-semibold bg-indigo-600 hover:bg-indigo-700 items-center">
               Login to Save Course
             </Link>
           )}
