@@ -4,7 +4,7 @@ import { images } from "../images";
 
 export default function About() {
   const teamMembers = [
-    { name: "مصطفي كمال محمود", role: "Team Leader", id: "mostafa", img: images.mika },
+    { name: "مصطفي كمال محمود", role: "Team Leader", id: "mostafa", img: images.mika, linkedinUrl: "https://www.linkedin.com/in/mostafa-kamal-a70649344/" },
     { name: "محمد أسامة السيد", role: "Team Member", id: "mohamed", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=400&auto=format&fit=crop" },
     { name: "احمد محمد محمد", role: "Team Member", id: "ahmed_m", img: "https://images.unsplash.com/photo-1564564321837-a57b7070ac5c?q=80&w=400&auto=format&fit=crop" },
     { name: "عبدالله مجدي السيد", role: "Team Member", id: "abdullah", img: "https://images.unsplash.com/photo-1583864697784-a0efc8379f70?q=80&w=400&auto=format&fit=crop" },
@@ -52,19 +52,22 @@ export default function About() {
           <h2 className="text-3xl font-bold mb-12">Meet Our Team</h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {teamMembers.map((member) => (
-              <div 
-                key={member.id} 
-                className={`card p-4 ${member.role === 'Team Leader' ? 'border-2 border-indigo-600 shadow-lg' : ''}`}
-              >
-                <img
-                  src={member.img}
-                  alt={member.name}
-                  className="w-32 h-32 mx-auto rounded-full object-cover ring-4 ring-indigo-300"
-                />
-                <h3 className={`mt-4 font-bold text-lg ${member.role === 'Team Leader' ? 'text-indigo-700' : ''}`}>
-                  {member.name}
-                </h3>
-                <p className="text-sm text-slate-600 font-semibold">{member.role}</p>
+              <div key={member.id}>
+                {member.linkedinUrl ? (
+                  <a href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" className="block">
+                    <div className={`card p-4 h-full ${member.role === 'Team Leader' ? 'border-2 border-indigo-600 shadow-lg' : ''}`}>
+                      <img src={member.img} alt={member.name} className="w-32 h-32 mx-auto rounded-full object-cover ring-4 ring-indigo-300" />
+                      <h3 className={`mt-4 font-bold text-lg ${member.role === 'Team Leader' ? 'text-indigo-700' : ''}`}>{member.name}</h3>
+                      <p className="text-sm text-slate-600 font-semibold">{member.role}</p>
+                    </div>
+                  </a>
+                ) : (
+                  <div className={`card p-4 h-full`}>
+                    <img src={member.img} alt={member.name} className="w-32 h-32 mx-auto rounded-full object-cover" />
+                    <h3 className="mt-4 font-bold text-lg">{member.name}</h3>
+                    <p className="text-sm text-slate-600 font-semibold">{member.role}</p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
