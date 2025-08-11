@@ -1,81 +1,103 @@
-"use client"
-
-import { useParams, Link } from "react-router-dom"
-import { courses } from "../data/courses"
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { courses } from "../data/courses"; // Make sure this path is correct
+import { useState, useEffect } from "react";
+import { getCurrentUser, addSavedCourse, removeSavedCourse, getSavedCourses } from "../lib/auth";
 
 export default function CourseDetails() {
-  const { slug } = useParams()
-  const course = courses.find((c) => c.slug === slug) || courses[0]
+  // Use 'slug' from the URL parameters, which matches the link in CourseCard
+  const { slug } = useParams(); 
+  const navigate = useNavigate();
+  
+  // Find the course by its 'slug' instead of 'id'
+  const course = courses.find((c) => c.slug === slug) || null;
+
+  const [isSaved, setIsSaved] = useState(() => {
+    const user = getCurrentUser();
+    if (user && course) {
+      return getSavedCourses(user.email).some(c => c.id === course.id);
+    }
+    return false;
+  });
+
+  // This effect listens for global auth or save changes to update the UI
+  useEffect(() => {
+    const handleStateChange = () => {
+      const user = getCurrentUser();
+      if (user && course) {
+        const savedCourses = getSavedCourses(user.email);
+        setIsSaved(savedCourses.some((c) => c.id === course.id));
+      } else {
+        setIsSaved(false);
+      }
+    };
+
+    window.addEventListener("authChanged", handleStateChange);
+    window.addEventListener("coursesChanged", handleStateChange);
+
+    return () => {
+      window.removeEventListener("authChanged", handleStateChange);
+      window.removeEventListener("coursesChanged", handleStateChange);
+    };
+  }, [slug, course]); // Re-run if the slug changes
+
+  const handleSaveToggle = () => {
+    const user = getCurrentUser(); 
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    
+    if (isSaved) {
+      removeSavedCourse(user.email, course.id);
+    } else {
+      addSavedCourse(user.email, course);
+    }
+  };
+
+  if (!course) {
+    return <div className="container-x py-10 text-center">Course not found.</div>;
+  }
+  
+  const user = getCurrentUser();
 
   return (
-    <section className="container-x py-10 lg:py-14 grid lg:grid-cols-[1fr_360px] gap-8">
-      <div>
-        {/* Course Image */}
-        <div className="w-full aspect-video rounded-xl overflow-hidden shadow-soft bg-black">
-          <img
-            src={course.thumbnail || "/placeholder.svg"}
-            alt={course.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
+    <section className="container-x py-12">
+      <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <img
+          src={course.thumbnail}
+          alt={course.title}
+          className="w-full rounded-xl shadow-lg object-cover"
+          onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Error'; }}
+        />
+        <div>
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">{course.title}</h1>
+          <p className="text-slate-700 mb-4">{course.description}</p>
+          <p className="mb-4">
+            <strong>Category:</strong> {course.category}
+          </p>
+          <p className="mb-6">
+            <strong>Price:</strong>{" "}
+            {course.price === 0 ? "Free" : `$${course.price}`}
+          </p>
 
-        {/* Title & Meta */}
-        <h1 className="mt-5 text-2xl sm:text-3xl font-extrabold">{course.title}</h1>
-        <div className="text-slate-700 mt-2">
-          Category: <span className="font-medium">{course.category}</span>
-        </div>
-
-        {/* Details */}
-        <div className="mt-8 grid lg:grid-cols-2 gap-6">
-          {/* About */}
-          <div>
-            <h2 className="font-bold text-xl mb-3">About this course</h2>
-            <p className="leading-7 text-slate-700">
-              {course.description || "No description available for this course yet."}
-            </p>
-
-            <h3 className="font-bold mt-6 mb-2">What you’ll learn</h3>
-            <ul className="list-disc pl-5 space-y-1 text-slate-700">
-              <li>Plan and structure real projects</li>
-              <li>Best practices, tips, and workflows</li>
-              <li>Security, optimization, and deployment</li>
-              <li>Monetization strategies and portfolio prep</li>
-            </ul>
-          </div>
-
-          {/* Curriculum */}
-          <div>
-            <h2 className="font-bold text-xl mb-3">Curriculum</h2>
-            <div className="border rounded-lg divide-y">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <div key={i} className="px-4 py-3 flex items-center justify-between">
-                  <span>Module {i + 1}: Lesson overview</span>
-                  <span className="text-slate-700">12:3{i}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          {user ? (
+            <button
+              onClick={handleSaveToggle}
+              className={`h-11 px-6 rounded-md text-white font-semibold transition-colors ${
+                isSaved
+                  ? "bg-red-600 hover:bg-red-700"
+                  : "bg-indigo-600 hover:bg-indigo-700"
+              }`}
+            >
+              {isSaved ? "Remove from Saved" : "Save Course"}
+            </button>
+          ) : (
+            <Link to="/login" className="inline-block h-11 px-6 rounded-md text-white font-semibold bg-indigo-600 hover:bg-indigo-700 flex items-center">
+              Login to Save Course
+            </Link>
+          )}
         </div>
       </div>
-
-      {/* Sidebar */}
-      <aside className="card p-5 h-fit sticky top-24">
-        <div className="text-3xl font-extrabold">
-          {course.price === 0 ? "Free" : `$${course.price}`}
-        </div>
-        <div className="text-sm text-slate-700 mt-1">
-          Lifetime access
-        </div>
-        <button className="btn-primary h-11 w-full mt-4">Enroll Now</button>
-        <div className="mt-5 space-y-2 text-sm text-slate-700">
-          <div>Projects & resources</div>
-          <div>Community & support</div>
-          <div>Certificate of completion</div>
-        </div>
-        <Link to="/courses" className="btn-outline h-10 w-full mt-4 text-center">
-          Browse more courses
-        </Link>
-      </aside>
     </section>
-  )
+  );
 }

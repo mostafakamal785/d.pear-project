@@ -1,9 +1,10 @@
-import { images } from "../images"
+import { images } from "../images";
 
 export const courses = [
   {
     id: 1,
     title: "Web Development Basics",
+    slug: "web-development-basics", // الرابط الفريد
     category: "Development",
     price: 0,
     description: "Learn HTML, CSS, and JavaScript from scratch.",
@@ -12,6 +13,7 @@ export const courses = [
   {
     id: 2,
     title: "Advanced React",
+    slug: "advanced-react",
     category: "Development",
     price: 50,
     description: "Master React with hands-on real-world projects.",
@@ -20,6 +22,7 @@ export const courses = [
   {
     id: 3,
     title: "UI/UX Design Fundamentals",
+    slug: "ui-ux-design-fundamentals",
     category: "Design",
     price: 30,
     description: "Learn how to design beautiful and user-friendly interfaces.",
@@ -28,6 +31,7 @@ export const courses = [
   {
     id: 4,
     title: "Data Science with Python",
+    slug: "data-science-with-python",
     category: "Data Science",
     price: 70,
     description: "Analyze data and build predictive models using Python.",
@@ -36,6 +40,7 @@ export const courses = [
   {
     id: 5,
     title: "Mobile App Development",
+    slug: "mobile-app-development",
     category: "Development",
     price: 45,
     description: "Build cross-platform apps using React Native.",
@@ -44,9 +49,10 @@ export const courses = [
   {
     id: 6,
     title: "Cybersecurity Essentials",
+    slug: "cybersecurity-essentials",
     category: "Security",
     price: 60,
     description: "Learn how to secure applications and protect against threats.",
     thumbnail: images.courses[5],
   },
-]
+];

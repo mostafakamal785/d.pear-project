@@ -13,6 +13,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import SavedCourses from "./pages/SavedCourses";
 
 // Utils
 import ScrollToTop from "./components/ScrollToTop";
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:slug" element={<CourseDetails />} />
           <Route path="/about" element={<About />} />
+          <Route path="/saved" element={<SavedCourses />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

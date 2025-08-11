@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
+import { getCurrentUser, logout } from "../lib/auth";
 
 function Item({ to, label, onClick }) {
   return (
@@ -8,9 +9,9 @@ function Item({ to, label, onClick }) {
       to={to}
       onClick={onClick}
       className={({ isActive }) =>
-        "px-3 py-2 rounded-pill text-sm font-medium transition-colors " +
+        "px-3 py-2 rounded-md text-sm font-medium transition-colors " +
         (isActive
-          ? "bg-brand-600 text-white"
+          ? "bg-indigo-600 text-white"
           : "text-slate-700 hover:text-slate-900 hover:bg-slate-200/70")
       }
     >
@@ -21,19 +22,31 @@ function Item({ to, label, onClick }) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState(getCurrentUser());
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handler = () => setUser(getCurrentUser());
+    window.addEventListener("authChanged", handler);
+    return () => window.removeEventListener("authChanged", handler);
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200 shadow-sm">
       <div className="container-x h-16 flex items-center">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-brand-600" />
+          <div className="h-8 w-8 rounded-lg bg-indigo-600" />
           <span className="text-lg font-extrabold tracking-tight">
-            Skill<span className="text-brand-600">Grow</span>
+            Skill<span className="text-indigo-600">Grow</span>
           </span>
         </Link>
 
-        {/* Desktop Menu */}
+        {/* Updated Desktop Menu */}
         <nav className="hidden md:flex items-center gap-1 ml-8">
           <Item to="/" label="Home" />
           <Item to="/courses" label="Courses" />
@@ -41,31 +54,40 @@ export default function Navbar() {
           <Item to="/contact" label="Contact" />
         </nav>
 
-        {/* Desktop Buttons */}
         <div className="ml-auto hidden sm:flex items-center gap-2">
-          <Link to="/courses" className="btn-outline h-10">
-            Browse
-          </Link>
-          <a href="#cta" className="btn-primary h-10">
-            Enroll
-          </a>
+          {user ? (
+            <>
+              <span className="font-medium text-sm">
+                Hi, {user.name}
+              </span>
+              <Link to="/saved" className="btn-outline h-10">
+                Saved Courses
+              </Link>
+              <button onClick={handleLogout} className="btn-outline h-10">
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="btn-outline h-10">
+                Login
+              </Link>
+              <Link to="/register" className="btn-primary h-10">
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
 
-        {/* Mobile Toggle Button */}
         <button
           className="ml-auto md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg transition-colors hover:bg-slate-200"
-          aria-label="Toggle menu"
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => setOpen(!open)}
         >
-          {open ? (
-            <FiX size={24} className="text-brand-600" />
-          ) : (
-            <FiMenu size={24} className="text-brand-600" />
-          )}
+          {open ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Updated Mobile Menu */}
       {open && (
         <div className="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur">
           <div className="container-x py-3 grid gap-2">
@@ -73,14 +95,25 @@ export default function Navbar() {
             <Item to="/courses" label="Courses" onClick={() => setOpen(false)} />
             <Item to="/about" label="About" onClick={() => setOpen(false)} />
             <Item to="/contact" label="Contact" onClick={() => setOpen(false)} />
-            <div className="flex gap-2 pt-2">
-              <Link to="/courses" className="btn-outline h-10 flex-1" onClick={() => setOpen(false)}>
-                Browse
-              </Link>
-              <a href="#cta" className="btn-primary h-10 flex-1" onClick={() => setOpen(false)}>
-                Enroll
-              </a>
-            </div>
+            {user ? (
+              <>
+                <Item to="/saved" label="Saved Courses" onClick={() => setOpen(false)} />
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setOpen(false);
+                  }}
+                  className="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-200/70"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Item to="/login" label="Login" onClick={() => setOpen(false)} />
+                <Item to="/register" label="Sign Up" onClick={() => setOpen(false)} />
+              </>
+            )}
           </div>
         </div>
       )}
