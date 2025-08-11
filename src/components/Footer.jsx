@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { FaFacebookF, FaYoutube, FaInstagram, FaCcVisa, FaCcMastercard, FaCcPaypal } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -43,26 +44,41 @@ export default function Footer() {
             <p className="text-white/90">mostafakamal78578@gmail.com</p>
             <p className="text-white/90">01096926586</p>
             <div className="mt-3 flex gap-3">
-              {["f", "▶", "◎"].map((icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="h-9 w-9 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
-                >
-                  {icon}
-                </a>
-              ))}
+              <a
+                href="#"
+                className="h-9 w-9 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
+              >
+                <FaFacebookF />
+              </a>
+              <a
+                href="#"
+                className="h-9 w-9 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
+              >
+                <FaYoutube />
+              </a>
+              <a
+                href="#"
+                className="h-9 w-9 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
+              >
+                <FaInstagram />
+              </a>
             </div>
           </div>
         </div>
 
         {/* Payments */}
-        <div className="lg:justify-self-end self-center text-white/90">
+        <div className="justify-self-center lg:justify-self-end self-center text-white/90">
           <div className="text-sm font-medium">Payments accepted</div>
-          <div className="mt-2 grid grid-cols-6 gap-2 max-w-[220px]">
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className="h-6 w-10 rounded bg-white/25"></div>
-            ))}
+          <div className="mt-2 grid grid-cols-6 gap-2">
+            <div className="h-6 w-10 rounded bg-white/20 flex items-center justify-center" title="Visa">
+              <FaCcVisa />
+            </div>
+            <div className="h-6 w-10 rounded bg-white/20 flex items-center justify-center" title="Mastercard">
+              <FaCcMastercard />
+            </div>
+            <div className="h-6 w-10 rounded bg-white/20 flex items-center justify-center" title="PayPal">
+              <FaCcPaypal />
+            </div>
           </div>
         </div>
       </div>
@@ -74,5 +90,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
