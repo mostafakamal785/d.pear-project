@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { getCurrentUser, logout } from "../lib/auth";
+import Logo from "./Logo";
 
 function Item({ to, label, onClick }) {
+  // ... (Item component remains the same)
   return (
     <NavLink
       to={to}
@@ -39,14 +41,10 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200 shadow-sm">
       <div className="container-x h-16 flex items-center">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-indigo-600" />
-          <span className="text-lg font-extrabold tracking-tight">
-            Skill<span className="text-indigo-600">Grow</span>
-          </span>
+        <Link to="/">
+          <Logo />
         </Link>
 
-        {/* Updated Desktop Menu */}
         <nav className="hidden md:flex items-center gap-1 ml-8">
           <Item to="/" label="Home" />
           <Item to="/courses" label="Courses" />
@@ -61,7 +59,7 @@ export default function Navbar() {
                 Hi, {user.name}
               </span>
               <Link to="/saved" className="btn-outline h-10">
-                Saved Courses
+                My Courses
               </Link>
               <button onClick={handleLogout} className="btn-outline h-10">
                 Logout
@@ -87,35 +85,35 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Updated Mobile Menu */}
+      {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur">
-          <div className="container-x py-3 grid gap-2">
-            <Item to="/" label="Home" onClick={() => setOpen(false)} />
-            <Item to="/courses" label="Courses" onClick={() => setOpen(false)} />
-            <Item to="/about" label="About" onClick={() => setOpen(false)} />
-            <Item to="/contact" label="Contact" onClick={() => setOpen(false)} />
-            {user ? (
-              <>
-                <Item to="/saved" label="Saved Courses" onClick={() => setOpen(false)} />
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    setOpen(false);
-                  }}
-                  className="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-200/70"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Item to="/login" label="Login" onClick={() => setOpen(false)} />
-                <Item to="/register" label="Sign Up" onClick={() => setOpen(false)} />
-              </>
-            )}
-          </div>
-        </div>
+         <div className="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur">
+         <div className="container-x py-3 grid gap-2">
+           <Item to="/" label="Home" onClick={() => setOpen(false)} />
+           <Item to="/courses" label="Courses" onClick={() => setOpen(false)} />
+           <Item to="/about" label="About" onClick={() => setOpen(false)} />
+           <Item to="/contact" label="Contact" onClick={() => setOpen(false)} />
+           {user ? (
+             <>
+               <Item to="/saved" label="My Courses" onClick={() => setOpen(false)} />
+               <button
+                 onClick={() => {
+                   handleLogout();
+                   setOpen(false);
+                 }}
+                 className="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-200/70"
+               >
+                 Logout
+               </button>
+             </>
+           ) : (
+             <>
+               <Item to="/login" label="Login" onClick={() => setOpen(false)} />
+               <Item to="/register" label="Sign Up" onClick={() => setOpen(false)} />
+             </>
+           )}
+         </div>
+       </div>
       )}
     </header>
   );

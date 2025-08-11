@@ -1,6 +1,16 @@
 import { FaFacebookF, FaYoutube, FaInstagram } from "react-icons/fa";
+import Logo from "../components/Logo"; 
+import { images } from "../images"; 
 
 export default function About() {
+  const teamMembers = [
+    { name: "مصطفي كمال محمود", role: "Team Leader", id: "mostafa", img: images.mika },
+    { name: "محمد أسامة السيد", role: "Team Member", id: "mohamed", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=400&auto=format&fit=crop" },
+    { name: "احمد محمد محمد", role: "Team Member", id: "ahmed_m", img: "https://images.unsplash.com/photo-1564564321837-a57b7070ac5c?q=80&w=400&auto=format&fit=crop" },
+    { name: "عبدالله مجدي السيد", role: "Team Member", id: "abdullah", img: "https://images.unsplash.com/photo-1583864697784-a0efc8379f70?q=80&w=400&auto=format&fit=crop" },
+    { name: "احمد عبدالرحمن منصور", role: "Team Member", id: "ahmed_a", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" },
+  ];
+
   return (
     <div>
       {/* Hero Section */}
@@ -40,16 +50,21 @@ export default function About() {
       <section className="bg-slate-50 py-20">
         <div className="container-x text-center">
           <h2 className="text-3xl font-bold mb-12">Meet Our Team</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {Array.from({ length: 4 }).map((_, idx) => (
-              <div key={idx} className="card p-4">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            {teamMembers.map((member) => (
+              <div 
+                key={member.id} 
+                className={`card p-4 ${member.role === 'Team Leader' ? 'border-2 border-indigo-600 shadow-lg' : ''}`}
+              >
                 <img
-                  src={`https://i.pravatar.cc/300?img=${idx + 5}`}
-                  alt="Team member"
-                  className="w-32 h-32 mx-auto rounded-full object-cover"
+                  src={member.img}
+                  alt={member.name}
+                  className="w-32 h-32 mx-auto rounded-full object-cover ring-4 ring-indigo-300"
                 />
-                <h3 className="mt-4 font-bold text-lg">John Doe</h3>
-                <p className="text-sm text-slate-600">Instructor</p>
+                <h3 className={`mt-4 font-bold text-lg ${member.role === 'Team Leader' ? 'text-indigo-700' : ''}`}>
+                  {member.name}
+                </h3>
+                <p className="text-sm text-slate-600 font-semibold">{member.role}</p>
               </div>
             ))}
           </div>
@@ -57,56 +72,26 @@ export default function About() {
       </section>
 
       {/* Contact Section */}
-
-    <section className="container-x py-20 grid md:grid-cols-2 gap-10 items-center">
-      <div className="space-y-3">
-        <div className="text-2xl font-bold">SkillGrow</div>
-        <ul className="text-slate-700 space-y-2">
-          <li>123 Learning St, Knowledge City</li>
-          <li>mostafakamal78578@gmail.com</li>
-          <li>Business: e-learning</li>
-        </ul>
-        <div className="mt-3 flex gap-3">
-          <a
-            href="#"
-            className="h-9 w-9 rounded-full bg-brand-600 flex items-center justify-center hover:bg-brand-700 transition-colors text-white"
-          >
-            <FaFacebookF />
-          </a>
-          <a
-            href="#"
-            className="h-9 w-9 rounded-full bg-red-600 flex items-center justify-center hover:bg-red-700 transition-colors text-white"
-          >
-            <FaYoutube />
-          </a>
-          <a
-            href="#"
-            className="h-9 w-9 rounded-full bg-pink-500 flex items-center justify-center hover:bg-pink-600 transition-colors text-white"
-          >
-            <FaInstagram />
-          </a>
+      <section className="container-x py-20 grid md:grid-cols-2 gap-10 items-center">
+        <div className="space-y-3">
+          <Logo />
+          <ul className="text-slate-700 space-y-2">
+            <li>123 Learning St, Knowledge City</li>
+            <li>mostafakamal78578@gmail.com</li>
+            <li>Business: e-learning</li>
+          </ul>
+          <div className="mt-3 flex gap-3">
+            <a href="#" className="h-9 w-9 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-700 transition-colors text-white"><FaFacebookF /></a>
+            <a href="#" className="h-9 w-9 rounded-full bg-red-600 flex items-center justify-center hover:bg-red-700 transition-colors text-white"><FaYoutube /></a>
+            <a href="#" className="h-9 w-9 rounded-full bg-pink-500 flex items-center justify-center hover:bg-pink-600 transition-colors text-white"><FaInstagram /></a>
+          </div>
         </div>
-      </div>
-
-      <div className="card overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-        <img
-          src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop"
-          alt="Office map"
-          className="w-full h-[300px] object-cover"
-        />
-      </div>
-    </section>
-
-      {/* CTA Section */}
-      <section className="hero-surface text-white py-16">
-        <div className="container-x text-center space-y-4">
-          <h2 className="text-3xl sm:text-4xl font-extrabold">Start Your Learning Journey</h2>
-          <p className="max-w-2xl mx-auto text-white/80">
-            Join thousands of learners improving their skills with SkillGrow.
-          </p>
-          <a href="/courses" className="btn-primary h-12 px-6">
-            Browse Courses
-          </a>
+        <div className="card overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+          <img
+            src="https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=1200&auto=format&fit=crop"
+            alt="Man working in an office"
+            className="w-full h-[300px] object-cover"
+          />
         </div>
       </section>
     </div>

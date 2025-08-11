@@ -8,9 +8,11 @@ import course4 from "./assets/images/card4.jpg"
 import course5 from "./assets/images/card5.jpg"
 import course6 from "./assets/images/card6.webp"
 
+import mika from "./assets/images/mika.jpg"
 
 export const images = {
   hero,
   about,
   courses: [course1, course2, course3, course4, course5, course6],
+  mika,
 }
