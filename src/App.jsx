@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast"; // 1. استيراد Toaster
 
 // Components
 import Navbar from "./components/Navbar";
@@ -21,6 +22,8 @@ import ScrollToTop from "./components/ScrollToTop";
 export default function App() {
   return (
     <div className="min-h-screen flex flex-col">
+      {/* 2. إضافة مكون Toaster هنا لعرض الإشعارات */}
+      <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
       <main className="flex-1">
         <ScrollToTop />
