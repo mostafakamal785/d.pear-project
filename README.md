@@ -1,6 +1,7 @@
 # 🎓 SkillGrow
-![Uploading the flow chart.png…]()
+## 🔄 Flowchart
 
+![User Flowchart](./the%20flow%20chart.jpg)
 **SkillGrow** is a modern educational platform built with React and Tailwind CSS.  
 It allows users to **browse courses**, **save favorites**, **purchase courses**, and **manage authentication** — all stored locally using `localStorage`.
 
