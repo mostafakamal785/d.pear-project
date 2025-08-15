@@ -44,13 +44,7 @@ export function logout() {
   window.dispatchEvent(new CustomEvent(AUTH_EVENT, { detail: null }));
 }
 
-// --- دوال الشراء الجديدة (تحل محل دوال الحفظ) ---
 
-/**
- * دالة لجلب الدورات المشتراة للمستخدم
- * @param {string} email - البريد الإلكتروني للمستخدم
- * @returns {Array} - قائمة بالدورات المشتراة
- */
 export function getPurchasedCourses(email) {
     if (!email) return [];
     const key = `purchased_${email}`;
@@ -61,11 +55,7 @@ export function getPurchasedCourses(email) {
     }
 }
 
-/**
- * دالة لشراء دورة وحفظها في قائمة المشتريات
- * @param {string} email - البريد الإلكتروني للمستخدم
- * @param {object} course - الدورة المراد شراؤها
- */
+
 export function purchaseCourse(email, course) {
   if (!email || !course) return;
   const key = `purchased_${email}`;
@@ -73,7 +63,6 @@ export function purchaseCourse(email, course) {
   if (!purchased.some((c) => c.id === course.id)) {
     purchased.push(course);
     localStorage.setItem(key, JSON.stringify(purchased));
-    // إرسال حدث لإعلام المكونات بعملية الشراء الجديدة
     window.dispatchEvent(new CustomEvent(PURCHASE_EVENT));
   }
 }

@@ -23,7 +23,7 @@ export default function HeroSection() {
             <Link to="/courses" className="btn-outline h-12 text-white border-white text-lg px-6">
               Browse Courses
             </Link>
-            <Link to={`/courses/${featuredCourse.id || ""}`} className="btn-primary h-12 text-lg px-6">
+            <Link to={`/courses/${featuredCourse.slug || ""}`} className="btn-primary h-12 text-lg px-6">
               Enroll Now
             </Link>
           </div>

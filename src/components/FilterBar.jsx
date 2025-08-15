@@ -1,5 +1,3 @@
-"use client"
-
 export default function FilterBar({ value, onChange, categories }) {
   const filterButtonClass = (isActive) =>
     `h-10 px-4 rounded-pill text-sm border transition-colors ${
