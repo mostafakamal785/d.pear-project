@@ -1,7 +1,6 @@
 import { FaFacebookF, FaYoutube, FaInstagram } from "react-icons/fa";
 import Logo from "../components/Logo"; 
 import { images } from "../images"; 
-import SectionTitle from "../components/SectionTitle";
 
 export default function About() {
   const teamLeader = { 
@@ -26,7 +25,10 @@ export default function About() {
 
       {/* Mission Section */}
       <section className="container-x py-20">
-        <SectionTitle title="Our Mission" align="center" />
+        {/* تم استبدال SectionTitle هنا */}
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold">Our Mission</h2>
+        </div>
         <p className="max-w-4xl mx-auto text-center text-slate-700 leading-8">
           We bring skill-first, project-based education to learners around the world.
           Our courses focus on real results with clear structure, step-by-step guides,
@@ -49,7 +51,10 @@ export default function About() {
       {/* Team Section - Updated Layout */}
       <section className="bg-slate-50 py-20">
         <div className="container-x text-center">
-          <SectionTitle title="Meet Our Team Leader" align="center" />
+          {/* تم استبدال SectionTitle هنا */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold">Meet Our Team Leader</h2>
+          </div>
           <div className="flex justify-center mt-8">
             <a href={teamLeader.linkedinUrl} target="_blank" rel="noopener noreferrer" className="block transform hover:scale-105 transition-transform">
               <div className="card p-6 w-72 border-2 border-indigo-600 shadow-lg">
