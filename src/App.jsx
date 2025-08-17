@@ -14,7 +14,9 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import SavedCourses from "./pages/SavedCourses";
+import Mydashboard from "./pages/Mydashboard";
+import CoursePlayer from "./pages/CoursePlayer"; 
+
 
 // Utils
 import ScrollToTop from "./components/ScrollToTop";
@@ -31,7 +33,8 @@ export default function App() {
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:slug" element={<CourseDetails />} />
           <Route path="/about" element={<About />} />
-          <Route path="/saved" element={<SavedCourses />} />
+          <Route path="/dashboard" element={<Mydashboard />} />
+          <Route path="/course/:slug/watch" element={<CoursePlayer />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

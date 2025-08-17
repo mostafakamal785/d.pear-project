@@ -7,53 +7,80 @@ import {
 } from "../lib/auth";
 import toast from "react-hot-toast";
 
-// --- مكون النافذة المنبثقة للدفع ---
+// --- Payment Modal Component ---
 function PaymentModal({ course, onClose, onConfirm }) {
-  const [cardNumber, setCardNumber] = useState("");
+  const [paymentDetails, setPaymentDetails] = useState({
+    cardName: "",
+    cardNumber: "",
+    expiryDate: "",
+    cvc: ""
+  });
+  const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPaymentDetails(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: null }));
+    }
+  };
+
+  const validatePayment = () => {
+    const newErrors = {};
+    if (!paymentDetails.cardName.trim()) newErrors.cardName = "Name is required.";
+    if (!/^\d{16}$/.test(paymentDetails.cardNumber.replace(/\s/g, ''))) newErrors.cardNumber = "Enter a valid 16-digit card number.";
+    if (!/^(0[1-9]|1[0-2])\/?([0-9]{2})$/.test(paymentDetails.expiryDate)) newErrors.expiryDate = "Use MM/YY format.";
+    if (!/^\d{3,4}$/.test(paymentDetails.cvc)) newErrors.cvc = "Enter a valid CVC.";
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleConfirm = (e) => {
     e.preventDefault();
-    // تحقق بسيط من أن الحقل ليس فارغًا
-    if (cardNumber.trim().length < 10) {
-      toast.error("Please enter a valid card number.");
-      return;
-    }
+    if (!validatePayment()) return;
+
     setIsLoading(true);
-    // محاكاة طلب الشبكة لإتمام الدفع
     setTimeout(() => {
       onConfirm();
       setIsLoading(false);
-      onClose(); // إغلاق النافذة بعد النجاح
+      onClose();
     }, 1000);
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
-      {/* النقر على الخلفية يغلق النافذة */}
       <div className="absolute inset-0" onClick={onClose}></div>
-      <div className="bg-white rounded-lg p-6 w-full max-w-sm relative">
+      <div className="bg-white rounded-lg p-6 w-full max-w-md relative">
         <h2 className="text-xl font-bold mb-4">Complete Your Purchase</h2>
-        <p className="mb-2">You are buying: <strong>{course.title}</strong></p>
-        <p className="font-bold text-lg mb-4">Price: ${course.price}</p>
-        <form onSubmit={handleConfirm}>
-          <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
-          <input
-            id="cardNumber"
-            type="text"
-            value={cardNumber}
-            onChange={(e) => setCardNumber(e.target.value)}
-            className="input w-full"
-            placeholder="xxxx xxxx xxxx xxxx"
-            required
-          />
+        <p className="mb-4">You are buying: <strong>{course.title}</strong> for <strong>${course.price}</strong></p>
+        <form onSubmit={handleConfirm} className="space-y-4">
+          <div>
+            <label htmlFor="cardName" className="block text-sm font-medium text-gray-700 mb-1">Cardholder Name</label>
+            <input id="cardName" name="cardName" type="text" value={paymentDetails.cardName} onChange={handleChange} className={`input w-full ${errors.cardName ? 'border-red-500' : ''}`} placeholder="John M. Doe" />
+            {errors.cardName && <p className="text-xs text-red-500 mt-1">{errors.cardName}</p>}
+          </div>
+          <div>
+            <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
+            <input id="cardNumber" name="cardNumber" type="text" value={paymentDetails.cardNumber} onChange={handleChange} className={`input w-full ${errors.cardNumber ? 'border-red-500' : ''}`} placeholder="xxxx xxxx xxxx xxxx" />
+            {errors.cardNumber && <p className="text-xs text-red-500 mt-1">{errors.cardNumber}</p>}
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="expiryDate" className="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
+              <input id="expiryDate" name="expiryDate" type="text" value={paymentDetails.expiryDate} onChange={handleChange} className={`input w-full ${errors.expiryDate ? 'border-red-500' : ''}`} placeholder="MM/YY" />
+              {errors.expiryDate && <p className="text-xs text-red-500 mt-1">{errors.expiryDate}</p>}
+            </div>
+            <div>
+              <label htmlFor="cvc" className="block text-sm font-medium text-gray-700 mb-1">CVC</label>
+              <input id="cvc" name="cvc" type="text" value={paymentDetails.cvc} onChange={handleChange} className={`input w-full ${errors.cvc ? 'border-red-500' : ''}`} placeholder="123" />
+              {errors.cvc && <p className="text-xs text-red-500 mt-1">{errors.cvc}</p>}
+            </div>
+          </div>
           <div className="mt-6 flex gap-3">
-            <button type="button" onClick={onClose} className="btn-outline w-full h-11" disabled={isLoading}>
-              Cancel
-            </button>
-            <button type="submit" className="btn-primary w-full h-11" disabled={isLoading}>
-              {isLoading ? "Processing..." : `Pay $${course.price}`}
-            </button>
+            <button type="button" onClick={onClose} className="btn-outline w-full h-11" disabled={isLoading}>Cancel</button>
+            <button type="submit" className="btn-primary w-full h-11" disabled={isLoading}>{isLoading ? "Processing..." : `Pay $${course.price}`}</button>
           </div>
         </form>
       </div>
@@ -62,8 +89,8 @@ function PaymentModal({ course, onClose, onConfirm }) {
 }
 
 
-// --- مكون بطاقة الدورة الرئيسي ---
-export default function CourseCard({ course }) {
+// --- Main CourseCard Component ---
+export default function CourseCard({ course, action = "details" }) {
   const navigate = useNavigate();
   const [isPurchased, setIsPurchased] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -77,12 +104,9 @@ export default function CourseCard({ course }) {
         setIsPurchased(false);
       }
     };
-    
     handleStateChange();
-
     window.addEventListener("authChanged", handleStateChange);
     window.addEventListener("coursesPurchased", handleStateChange);
-
     return () => {
       window.removeEventListener("authChanged", handleStateChange);
       window.removeEventListener("coursesPurchased", handleStateChange);
@@ -99,7 +123,7 @@ export default function CourseCard({ course }) {
     if (course.price === 0) {
         confirmPurchase();
     } else {
-        setIsModalOpen(true); // وإلا، افتح نافذة الدفع
+        setIsModalOpen(true);
     }
   };
 
@@ -108,6 +132,9 @@ export default function CourseCard({ course }) {
     purchaseCourse(user.email, course);
     toast.success("Purchase successful! The course is now in 'My Courses'.");
   };
+
+  const linkDestination = action === "watch" ? `/course/${course.slug}/watch` : `/courses/${course.slug}`;
+  const buttonText = action === "watch" ? "Start Learning" : "Details";
 
   return (
     <>
@@ -119,7 +146,7 @@ export default function CourseCard({ course }) {
         />
       )}
       <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow overflow-hidden flex flex-col">
-        <Link to={`/courses/${course.slug}`}>
+        <Link to={linkDestination}>
           <img
             src={course.thumbnail}
             alt={course.title}
@@ -130,8 +157,8 @@ export default function CourseCard({ course }) {
           <p className="text-sm text-indigo-600 font-semibold">{course.category}</p>
           <h3 className="font-bold text-lg mt-1">{course.title}</h3>
           <div className="mt-auto pt-4 flex justify-between items-center gap-2">
-            <Link to={`/courses/${course.slug}`} className="btn-outline h-10 text-sm flex-1 text-center">
-              Details
+            <Link to={linkDestination} className="btn-outline h-10 text-sm flex-1 text-center">
+              {buttonText}
             </Link>
             {isPurchased ? (
               <span className="btn-primary-disabled h-10 text-sm flex-1 text-center">Purchased</span>

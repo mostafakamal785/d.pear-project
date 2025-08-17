@@ -5,7 +5,6 @@ import { getCurrentUser, logout } from "../lib/auth";
 import Logo from "./Logo";
 
 function Item({ to, label, onClick }) {
-  // ... (Item component remains the same)
   return (
     <NavLink
       to={to}
@@ -58,8 +57,8 @@ export default function Navbar() {
               <span className="font-medium text-sm">
                 Hi, {user.name}
               </span>
-              <Link to="/saved" className="btn-outline h-10">
-                My Courses
+              <Link to="/dashboard" className="btn-outline h-10">
+                My Dashboard
               </Link>
               <button onClick={handleLogout} className="btn-outline h-10">
                 Logout
@@ -95,7 +94,7 @@ export default function Navbar() {
            <Item to="/contact" label="Contact" onClick={() => setOpen(false)} />
            {user ? (
              <>
-               <Item to="/saved" label="My Courses" onClick={() => setOpen(false)} />
+               <Item to="/dashboard" label="My Dashboard" onClick={() => setOpen(false)} />
                <button
                  onClick={() => {
                    handleLogout();
