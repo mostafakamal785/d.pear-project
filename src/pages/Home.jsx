@@ -5,7 +5,6 @@ import { Link } from "react-router-dom"
 // استيراد الدورات من ملف JSON
 
 export default function Home() {
-  // تعديل: اختيار أول 4 دورات كدورات مميزة
   const featured = courses.slice(0, 4)
   console.log('Featured courses:', featured);
 
