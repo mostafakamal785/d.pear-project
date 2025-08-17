@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { courses } from "../data/courses";
 
 export default function HeroSection() {
-  // استخدام قيمة افتراضية آمنة في حال كانت مصفوفة الدورات فارغة
   const featuredCourse = courses[0] || {};
 
   return (
@@ -30,14 +29,11 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Image and Course Card */}
         <div className="flex justify-center lg:justify-end">
-          {/* 1. تمت إضافة وسم Link ليحيط بالبطاقة بأكملها */}
           <Link 
             to={`/courses/${featuredCourse.slug || ""}`} 
-            className="block group" // `group` is for advanced hover effects if needed
+            className="block group"
           >
-            {/* 2. تمت إضافة تأثيرات hover */}
             <div className="bg-white text-slate-900 rounded-2xl p-4 sm:p-5 max-w-sm w-full shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
               <img
                 src={featuredCourse.thumbnail || "https://placehold.co/600x400/cccccc/ffffff?text=Course"}
