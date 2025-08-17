@@ -7,14 +7,9 @@ import {
 } from "../lib/auth";
 import toast from "react-hot-toast";
 
-// --- Payment Modal Component ---
+// --- Payment Modal Component (Remains the same) ---
 function PaymentModal({ course, onClose, onConfirm }) {
-  const [paymentDetails, setPaymentDetails] = useState({
-    cardName: "",
-    cardNumber: "",
-    expiryDate: "",
-    cvc: ""
-  });
+  const [paymentDetails, setPaymentDetails] = useState({ cardName: "", cardNumber: "", expiryDate: "", cvc: "" });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -145,14 +140,16 @@ export default function CourseCard({ course, action = "details" }) {
           onConfirm={confirmPurchase} 
         />
       )}
-      <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow overflow-hidden flex flex-col">
-        <Link to={linkDestination}>
-          <img
-            src={course.thumbnail}
-            alt={course.title}
-            className="w-full h-48 object-cover"
-          />
-        </Link>
+      <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col group transform hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl">
+        <div className="overflow-hidden">
+          <Link to={linkDestination}>
+            <img
+              src={course.thumbnail}
+              alt={course.title}
+              className="w-full h-48 object-cover transform transition-transform duration-300 group-hover:scale-110"
+            />
+          </Link>
+        </div>
         <div className="p-4 flex flex-col flex-grow">
           <p className="text-sm text-indigo-600 font-semibold">{course.category}</p>
           <h3 className="font-bold text-lg mt-1">{course.title}</h3>

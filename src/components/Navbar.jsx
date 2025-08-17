@@ -86,33 +86,33 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {open && (
-         <div className="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur">
-         <div className="container-x py-3 grid gap-2">
-           <Item to="/" label="Home" onClick={() => setOpen(false)} />
-           <Item to="/courses" label="Courses" onClick={() => setOpen(false)} />
-           <Item to="/about" label="About" onClick={() => setOpen(false)} />
-           <Item to="/contact" label="Contact" onClick={() => setOpen(false)} />
-           {user ? (
-             <>
-               <Item to="/dashboard" label="My Dashboard" onClick={() => setOpen(false)} />
-               <button
-                 onClick={() => {
-                   handleLogout();
-                   setOpen(false);
-                 }}
-                 className="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-200/70"
-               >
-                 Logout
-               </button>
-             </>
-           ) : (
-             <>
-               <Item to="/login" label="Login" onClick={() => setOpen(false)} />
-               <Item to="/register" label="Sign Up" onClick={() => setOpen(false)} />
-             </>
-           )}
-         </div>
-       </div>
+              <div className="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur">
+              <div className="container-x py-3 grid gap-2">
+                <Item to="/" label="Home" onClick={() => setOpen(false)} />
+                <Item to="/courses" label="Courses" onClick={() => setOpen(false)} />
+                <Item to="/about" label="About" onClick={() => setOpen(false)} />
+                <Item to="/contact" label="Contact" onClick={() => setOpen(false)} />
+                {user ? (
+                  <>
+                    <Item to="/dashboard" label="My Dashboard" onClick={() => setOpen(false)} />
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setOpen(false);
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-200/70"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Item to="/login" label="Login" onClick={() => setOpen(false)} />
+                    <Item to="/register" label="Sign Up" onClick={() => setOpen(false)} />
+                  </>
+                )}
+              </div>
+            </div>
       )}
     </header>
   );

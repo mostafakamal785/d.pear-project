@@ -1,21 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaFacebookF, FaYoutube, FaInstagram, FaCcVisa, FaCcMastercard, FaCcPaypal } from "react-icons/fa";
 import Logo from "./Logo";
-function FooterLogo() {
-  return (
-    <div className="flex items-center gap-2">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-8 w-8">
-        <rect width="32" height="32" rx="8" fill="rgba(255, 255, 255, 0.2)" /> 
-        <path d="M12.5 22V10H19.5C21.433 10 23 11.567 23 13.5C23 15.433 21.433 17 19.5 17H16" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M16 17L19.5 22" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      <span className="text-lg font-extrabold tracking-tight text-white">
-        Skill<span className="opacity-80">Grow</span>
-      </span>
-    </div>
-  );
-}
-
 
 export default function Footer() {
   return (
@@ -23,7 +8,7 @@ export default function Footer() {
       <div className="container-x py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
         
         <div className="space-y-4">
-          <FooterLogo />
+            <Logo variant="footer" />
           <p className="text-white/80 max-w-sm leading-relaxed">
             Practical, project-based courses to help you learn faster and build real skills.
           </p>
