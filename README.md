@@ -34,7 +34,50 @@ It allows users to **browse courses**, **save favorites**, **purchase courses**,
   - Cross-component state updates via `CustomEvent` (`authChanged`).
 
 ---
+---
 
+## 🖼️ Screenshots
+
+> Below are some preview screenshots of **SkillGrow** in action:
+
+### 🏠 Homepage  
+![Homepage Screenshot](./src/assets/screenshots/home.png)  
+*Landing page with featured courses and clean navigation.*
+
+### 📚 Courses Page  
+![Courses Screenshot](./src/assets/screenshots/courses.png)  
+*Browse all available courses with filtering and details.*
+
+### 💳 Purchased Page  
+![Purchased Screenshot](./src/assets/screenshots/purchased.png)  
+*View all the courses you have purchased, along with your personal profile information in one place.*
+
+
+### 💳 Payment Modal  
+![Payment Screenshot](./src/assets/screenshots/payment.png)  
+*Simple modal for course purchase confirmation.*
+
+### 📘 Course Details Page  
+![Course Details Screenshot](./src/assets/screenshots/details.png)  
+*Explore full information about a specific course, including title, description, price, and the option to save or purchase it.*
+
+### ▶️ Course Player Page  
+![Course Player Screenshot](./src/assets/screenshots/play.png)  
+*Access and watch your purchased course content, including videos, lessons, and downloadable resources, all within a structured player interface.*
+
+### 🔑 Authentication (Login / Register)  
+![Login Screenshot](./src/assets/screenshots/login.png)  
+![Register Screenshot](./src/assets/screenshots/register.png)  
+
+*Users can either register for a new account or log in with existing credentials. Sessions are stored in localStorage to keep them signed in across visits.*  
+
+**Features:**  
+- ✅ Dedicated Login and Register pages  
+- ✅ Secure form validation  
+- ✅ Persistent session using localStorage  
+- ✅ Automatic redirect to dashboard after login  
+
+---
 ## 🛠 Tech Stack
 
 | Technology         | Purpose |
